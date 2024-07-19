@@ -4,8 +4,8 @@
 
 ======
 
-Memory efficinet minimalist streaming XLSX reader that can handle piped 
-streams as input. Events are emmited while reading the stream.
+Memory efficient minimalist streaming XLSX reader that can handle piped 
+streams as input. Events are emitted while reading the stream.
 
 Example
 
@@ -56,7 +56,7 @@ workBookReader.on('worksheet', function (workSheetReader) {
     console.log(workSheetReader.name);
 
     // if we do not listen for rows we will only get end event
-    // and have infor about the sheet like row count
+    // and have info about the sheet like row count
     workSheetReader.on('row', function (row) {
         if (row.attributes.r == 1){
             // do something with row 1 like save as column names
@@ -82,7 +82,6 @@ workBookReader.on('end', function () {
 fs.createReadStream(fileName).pipe(workBookReader);
 
 ```
-
 Beta Warning
 
 -------
@@ -96,11 +95,14 @@ Limitations
 -------
 The row reader currently returns stored values for formulas (these are normally available)
 and does not calculate the formula itself. As time permits the row handler will be more capable 
-but was enough for currrent purposes (loading values from large worksheets fast)
+but was enough for current purposes (loading values from large worksheets fast)
  
 Inspiration
 
 -----------
+The project originated as a fork of [xlsx-stream-reader], to address some issues encountered while using it. 
+The package was no longer maintained and forks were not being merged anymore, so we decided to create a new package instead.
+
 Need a simple XLSX file streaming reader to handle large excel sheets but only
 one available/compatible was by guyonroche/exceljs. The stream reader module at
 the time was unfinished/unusable and rewrite attempts exposed column shifting I
@@ -109,20 +111,20 @@ could not solve
 More Information
 
 -----------
-Events are emmited as pertinent parts of the workbook and worksheet are receieved
+Events are emitted as pertinent parts of the workbook and worksheet are received
 in the stream. Theoretically you could pause the input stream if events are being
-receieved too fast but this has not been tested
+received too fast but this has not been tested
 
-Events can potentially (even though I have not seen it) be receieved out of order,
-if you receive a worksheet end event while still receieving rows be sure to make sure
-your number of rows receieved equals the `workSheetReader.rowCount` 
+Events can potentially (even though I have not seen it) be received out of order,
+if you receive a worksheet end event while still receiving rows be sure to make sure
+your number of rows received equals the `workSheetReader.rowCount` 
 
 Theoretically you could process an excel sheet as it is being uploaded, depending
 on the sheet type, but untried (I encountered some XLSX files that have a different
 zip format that requires having the entire file to read the archive contents properly),
-but still probably better to save temp first and read streasm from there.
+but still probably better to save temp first and read streams from there.
 
-Currently if the zip archive does not have the shared strings at the begining of the
+Currently if the zip archive does not have the shared strings at the beginning of the
 archive then the input stream for each sheet is pied into a temp file until the shared
 string are encountered and processed, then re-read the temp worksheets with the shared
 strings.
@@ -144,40 +146,40 @@ some may be thrown depending on where the error happened)
 
 #### Event: 'end'
 
-Emmitted once the XLSX zip parser has closed and all sheets have been processed
+Emitted once the XLSX zip parser has closed and all sheets have been processed
 
 #### Event: 'sharedStrings'
 
-After the workbook shared strings have been parsed this event is emmited. Shared strings 
+After the workbook shared strings have been parsed this event is emitted. Shared strings 
 are available via array `workBookReader.workBookSharedStrings`.
 
 #### Event: 'styles'
 
-After the workbook styles have been parsed this event is emmited. Styles are available
+After the workbook styles have been parsed this event is emitted. Styles are available
 via array `workBookReader.workBookStyles`
 
 #### Event: 'worksheet'
 
 * `workSheetReader` {Object} XlsxStreamReaderWorkSheet object
 
-Emmitted when a worksheet is reached. The sheet number is availble via 
+Emitted when a worksheet is reached. The sheet number is available via 
 {Number} `workSheetReader.id`. You can either process or skip at this point, 
 but you must do one for the processing to the next sheet to continue/finish.
 
-Once event is recieved you can attach worksheet on handlers (end, row) then you
+Once event is received you can attach worksheet on handlers (end, row) then you
 would `workSheetReader.process()`. If you do not want to process a sheet and instead
 want to skip entirely, you would `workSheetReader.skip()` without attaching any handlers.
 
 #### Worksheet Event: 'end'
 
-Emmitted once the end of the worksheet has been reached. The row count is 
+Emitted once the end of the worksheet has been reached. The row count is 
 available via {Number} `workSheetReader.rowCount`
 
 #### Worksheet Event: 'row'
 
 * `row` {Object} Row object
 
-Emmitted on every row encountered in the worksheet. for more details on what 
+Emitted on every row encountered in the worksheet. for more details on what 
 is in the row object attributes, see the [Row class][msdnRows] on MSDN.  
 
 For example:
@@ -209,16 +211,14 @@ Used Modules
 Authors
 
 -----------
-Written by [Brian Taber](https://github.com/DaSpawn) and [Kirill Husyatin](https://github.com/kikill95)
-
-[![DaSpawn's Gratipay][gratipay-image-daspawn]][gratipay-url-daspawn]
+Written by [Ignacio Alonso](https://github.com/ignacio-alonso) and [Fernando Quintan](https://github.com/fernandoqcv). Fork of [xlsx-stream-reader]
 
 License
 
 -----------
 [MIT](LICENSE)
 
-[gratipay-url-daspawn]: https://gratipay.com/~DaSpawn
+[xlsx-stream-reader]: https://www.npmjs.com/package/xlsx-stream-reader
 [gratipay-image-daspawn]: https://img.shields.io/gratipay/team/daspawn.svg
 [msdnRows]: https://msdn.microsoft.com/EN-US/library/office/documentformat.openxml.spreadsheet.row.aspx
 [msdnSheets]: https://msdn.microsoft.com/EN-US/library/office/gg278309.aspx
