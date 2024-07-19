@@ -11,7 +11,7 @@ Available change types per release: Added|Changed|Deprecated|Fixed|Removed|Secur
 
 ### Added
 
-## 1.1.1 - 2024-xx-xx
+## 1.x.x - 2024-xx-xx
 
 ### Added
 - Changelog file to keep track of changes through versions
