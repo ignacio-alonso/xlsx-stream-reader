@@ -100,7 +100,7 @@ but was enough for current purposes (loading values from large worksheets fast)
 Inspiration
 
 -----------
-The project originated as a fork of [xlsx-stream-reader](https://www.npmjs.com/package/xlsx-stream-reader), to address some issues encountered while using it. 
+The project originated as a fork of [xlsx-stream-reader], to address some issues encountered while using it. 
 The package was no longer maintained and forks were not being merged anymore, so we decided to create a new package instead.
 
 Need a simple XLSX file streaming reader to handle large excel sheets but only
@@ -211,9 +211,7 @@ Used Modules
 Authors
 
 -----------
-Written by [Brian Taber](https://github.com/DaSpawn) and [Kirill Husyatin](https://github.com/kikill95)
-
-[![DaSpawn's Gratipay][gratipay-image-daspawn]][gratipay-url-daspawn]
+Written by [Ignacio Alonso](https://github.com/ignacio-alonso) and [Fernando Quintan](https://github.com/fernandoqcv). Fork of [xlsx-stream-reader]
 
 License
 
