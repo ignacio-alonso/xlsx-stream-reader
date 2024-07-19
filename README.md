@@ -82,7 +82,6 @@ workBookReader.on('end', function () {
 fs.createReadStream(fileName).pipe(workBookReader);
 
 ```
-
 Beta Warning
 
 -------
@@ -101,6 +100,9 @@ but was enough for current purposes (loading values from large worksheets fast)
 Inspiration
 
 -----------
+The project originated as a fork of [xlsx-stream-reader](https://www.npmjs.com/package/xlsx-stream-reader), to address some issues encountered while using it. 
+The package was no longer maintained and forks were not being merged anymore, so we decided to create a new package instead.
+
 Need a simple XLSX file streaming reader to handle large excel sheets but only
 one available/compatible was by guyonroche/exceljs. The stream reader module at
 the time was unfinished/unusable and rewrite attempts exposed column shifting I
@@ -218,7 +220,7 @@ License
 -----------
 [MIT](LICENSE)
 
-[gratipay-url-daspawn]: https://gratipay.com/~DaSpawn
+[xlsx-stream-reader]: https://www.npmjs.com/package/xlsx-stream-reader
 [gratipay-image-daspawn]: https://img.shields.io/gratipay/team/daspawn.svg
 [msdnRows]: https://msdn.microsoft.com/EN-US/library/office/documentformat.openxml.spreadsheet.row.aspx
 [msdnSheets]: https://msdn.microsoft.com/EN-US/library/office/gg278309.aspx
