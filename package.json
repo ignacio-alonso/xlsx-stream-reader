@@ -1,7 +1,7 @@
 {
   "name": "xlsx-stream-reader",
-  "version": "1.1.1",
-  "description": "Memory efficinet non-blocking/event based streaming XLSX reader",
+  "version": "1.0.0",
+  "description": "Memory efficient non-blocking/event based streaming XLSX reader",
   "main": "index.js",
   "scripts": {
     "test": "standard && mocha --timeout 20000 test",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/daspawn/xlsx-stream-reader.git"
+    "url": "git+https://github.com/valtech/xlsx-stream-reader.git"
   },
   "engines": {
     "node": ">= 0.10.0"
@@ -20,12 +20,12 @@
     "stream",
     "simple"
   ],
-  "author": "Brian Taber <btaber@diversecg.com>",
+  "author": "Fernando Quintana  <fernando.quintana@valtech.com> & Ignacio Alonso <ignacio.alonso@valtech.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/daspawn/xlsx-stream-reader/issues"
+    "url": "https://github.com/valtech/xlsx-stream-reader/issues"
   },
-  "homepage": "https://github.com/daspawn/xlsx-stream-reader#readme",
+  "homepage": "https://github.com/valtech/xlsx-stream-reader#readme",
   "dependencies": {
     "sax": "^1.2.4",
     "ssf": "^0.11.2",
