@@ -158,6 +158,23 @@ describe('The xslx stream parser', function () {
   })
 })
 
+describe('Empty rows are omitted', function () {
+  it('rows with no data are omitted', (done) => {
+    const workBookReader = new XlsxStreamReader()
+    fs.createReadStream(path.join(__dirname, 'empty_rows.xlsx')).pipe(
+      workBookReader
+    )
+
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('row', function (row) {
+        assert.strictEqual(Number(row.attributes.r), 2)
+        done()
+      })
+      workSheetReader.process()
+    })
+  })
+})
+
 function consumeXlsxFile (cb) {
   const workBookReader = new XlsxStreamReader()
   workBookReader.on('worksheet', sheet => sheet.process())
