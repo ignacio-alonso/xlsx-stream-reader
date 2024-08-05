@@ -20,10 +20,13 @@ Available change types per release: Added|Changed|Deprecated|Fixed|Removed|Secur
 
 - Bug when rows have no data.  
   Bug Description: when the cells in a row have no values, but at least one cell is formatted, the xml contains an entry for the row, and the `row.values` array is filled with empty strings.
-  The solution was to only emit the row if at least one cell has a value.  
-
+  The solution was to only emit the row if at least one cell has a value.
 - Bug when counting the number of rows.  
   Bug Description: when the cells in a row have no values, but at least one cell is formatted, the xml contains an entry for the row and the row count is incremented.  
-  The solution was to increment the row count only after checking that at least a cell in the row has a value. Note that colors or other formats are not considered values. 
+  The solution was to increment the row count only after checking that at least a cell in the row has a value. Note that colors or other formats are not considered values.
+
+### Security
+- Vulnerabilities  
+  Vulnerabilities were addressed by updating dependencies. The only library that underwent a major version change was Mocha.
 
 
