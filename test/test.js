@@ -175,6 +175,49 @@ describe('Empty rows are omitted', function () {
   })
 })
 
+describe('Rows are properly counted', function () {
+  it('when there are not rows with data the row count is 0', (done) => {
+    const workBookReader = new XlsxStreamReader()
+    fs.createReadStream(path.join(__dirname, 'row_counter.xlsx')).pipe(
+      workBookReader
+    )
+
+    workBookReader.on('worksheet', function (workSheetReader) {
+      if (workSheetReader.name !== 'no data') {
+        workSheetReader.skip()
+        return
+      }
+
+      workSheetReader.on('end', function () {
+        assert.strictEqual(workSheetReader.rowCount, 0)
+        done()
+      })
+
+      workSheetReader.process()
+    })
+  })
+
+  it('when there are rows with formatted cells but no data, only the rows with data are counted', (done) => {
+    const workBookReader = new XlsxStreamReader()
+    fs.createReadStream(path.join(__dirname, 'row_counter.xlsx')).pipe(
+      workBookReader
+    )
+
+    workBookReader.on('worksheet', function (workSheetReader) {
+      if (workSheetReader.name !== 'formatted cells') {
+        workSheetReader.skip()
+        return
+      }
+
+      workSheetReader.on('end', function () {
+        assert.strictEqual(workSheetReader.rowCount, 2)
+        done()
+      })
+
+      workSheetReader.process()
+    })
+  })
+})
 function consumeXlsxFile (cb) {
   const workBookReader = new XlsxStreamReader()
   workBookReader.on('worksheet', sheet => sheet.process())
