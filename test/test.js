@@ -218,6 +218,39 @@ describe('Rows are properly counted', function () {
     })
   })
 })
+
+describe('Row type node', function () {
+  it('contains "number" attribute', (done) => {
+    const workBookReader = new XlsxStreamReader()
+    fs.createReadStream(path.join(__dirname, 'row_numbers.xlsx')).pipe(
+      workBookReader
+    )
+
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('row', function (row) {
+        assert.notStrictEqual(row.number, undefined)
+        done()
+      })
+      workSheetReader.process()
+    })
+  })
+
+  it('typeof row.number is "number"', (done) => {
+    const workBookReader = new XlsxStreamReader()
+    fs.createReadStream(path.join(__dirname, 'row_numbers.xlsx')).pipe(
+      workBookReader
+    )
+
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('row', function (row) {
+        assert.strictEqual(typeof row.number, 'number')
+        done()
+      })
+      workSheetReader.process()
+    })
+  })
+})
+
 function consumeXlsxFile (cb) {
   const workBookReader = new XlsxStreamReader()
   workBookReader.on('worksheet', sheet => sheet.process())
