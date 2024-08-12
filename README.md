@@ -58,7 +58,7 @@ workBookReader.on('worksheet', function (workSheetReader) {
     // if we do not listen for rows we will only get end event
     // and have info about the sheet like row count
     workSheetReader.on('row', function (row) {
-        if (row.attributes.r == 1){
+        if (row.number === 1){
             // do something with row 1 like save as column names
         }else{
             // second param to forEach colNum is very important as
@@ -190,6 +190,9 @@ For example:
 * `row.attributes.ht`: Row height measured in point size
 * `row.attributes.customFormat`: '1' if the row style should be applied.
 * `row.attributes.hidden`: '1' if the row is hidden
+
+Extended:
+* `row.number`: row index parsed to number
 
 References
 
