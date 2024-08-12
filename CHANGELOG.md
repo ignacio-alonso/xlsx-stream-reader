@@ -11,6 +11,12 @@ Available change types per release: Added|Changed|Deprecated|Fixed|Removed|Secur
 
 ### Added
 
+## 1.x.x - 2024-08-09
+
+### Added
+
+- New attribute to row type node `row.number` as `number` instead of `string`.
+
 ## 1.x.x - 2024-xx-xx
 
 ### Added
