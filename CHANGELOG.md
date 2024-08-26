@@ -11,6 +11,12 @@ Available change types per release: Added|Changed|Deprecated|Fixed|Removed|Secur
 
 ### Added
 
+## 1.x.x - 2024-08-26
+
+### Added
+
+- Values from cells with boolean tag will now be parsed to `boolean`.
+
 ## 1.x.x - 2024-08-09
 
 ### Added

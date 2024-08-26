@@ -251,6 +251,30 @@ describe('Row type node', function () {
   })
 })
 
+describe('Rows with booleans', function () {
+  it('Only boolean values are parsed', (done) => {
+    const workBookReader = new XlsxStreamReader()
+    fs.createReadStream(path.join(__dirname, 'booleans.xlsx')).pipe(
+      workBookReader
+    )
+
+    const rows = []
+    workBookReader.on('worksheet', function (workSheetReader) {
+      workSheetReader.on('row', function (row) {
+        rows.push(row.values);
+      })
+      workSheetReader.on('end', function () {
+        assert.strictEqual(typeof rows[0][1], 'boolean')
+        assert.strictEqual(typeof rows[1][1], 'boolean')
+        assert.strictEqual(typeof rows[2][1], 'string')
+        assert.strictEqual(typeof rows[3][1], 'string')
+        done()
+      })
+      workSheetReader.process()
+    })
+  })
+})
+
 function consumeXlsxFile (cb) {
   const workBookReader = new XlsxStreamReader()
   workBookReader.on('worksheet', sheet => sheet.process())
